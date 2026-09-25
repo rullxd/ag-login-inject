@@ -1,0 +1,5 @@
+# One email per line. Lines starting with # are skipped.
+# All accounts must share the same password (Google Workspace requirement).
+user1@yourdomain.com
+user2@yourdomain.com
+# user3@yourdomain.com

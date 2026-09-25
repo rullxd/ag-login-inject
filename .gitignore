@@ -1,0 +1,24 @@
+# Data & logs
+*.log
+*.txt
+!requirements.txt
+!emails.example.txt
+!README.md
+*.png
+*.jpg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

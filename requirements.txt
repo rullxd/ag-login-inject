@@ -1,0 +1,4 @@
+playwright>=1.40
+
+# Optional: for --headless on Linux servers without a display
+# xvfbwrapper>=0.2.9
