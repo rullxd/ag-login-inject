@@ -121,9 +121,8 @@ def _check_url_for_code(page, code_holder: dict) -> bool:
 
 # Button labels for intermediary and consent screens (EN + ID)
 _INTERSTITIAL_BUTTONS = [
-    "Login", "Sign in",  # Google Antigravity warning screen
     "Saya mengerti", "I understand", "Terima", "Accept",
-    "Setuju", "I agree", "Berikutnya", "Next",
+    "Login", "Sign in", "Setuju", "I agree", "Berikutnya", "Next",
 ]
 _CONSENT_BUTTONS = [
     "Continue", "Lanjutkan", "Allow", "Izinkan", "I agree", "Setuju",
@@ -197,14 +196,14 @@ def playwright_login(email: str, password: str, port: int = DEFAULT_CALLBACK_POR
             # Step 2: Password
             page.locator('input[type="password"]:visible').fill(password)
             page.locator("#passwordNext button").click()
-            time.sleep(1)
-            page.wait_for_load_state("networkidle", timeout=10000)
+            time.sleep(2)
+            page.wait_for_load_state("networkidle", timeout=15000)
 
-            # Step 3: Intermediary screens (e.g. "Pastikan Anda mendownload...")
+            # Step 3: Intermediary screens
             for _ in range(5):
                 if _check_url_for_code(page, code_holder):
                     break
-                time.sleep(0.3)
+                time.sleep(0.5)
                 page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                 clicked = False
                 for txt in _INTERSTITIAL_BUTTONS:
@@ -213,7 +212,7 @@ def playwright_login(email: str, password: str, port: int = DEFAULT_CALLBACK_POR
                         try:
                             btn.first.scroll_into_view_if_needed()
                             btn.first.click()
-                            page.wait_for_load_state("networkidle", timeout=8000)
+                            page.wait_for_load_state("networkidle", timeout=10000)
                             clicked = True
                         except Exception:
                             pass
